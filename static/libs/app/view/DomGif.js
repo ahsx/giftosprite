@@ -12,6 +12,12 @@
 		//  [_PRO]  /  Properties
 		//=========/------------------------------------------------
 
+		/**
+		 *	Fullscreen display
+		 **/
+		_fullscreen: false,
+
+
 		//===========/----------------------------------------------
 		//  [_GET]  /  Getters Setters
 		//=========/------------------------------------------------
@@ -39,6 +45,7 @@
 			this.hide();
 
 			this.container = this.view.find('.container');
+			this.win = jQuery(window);
 
 			var img = jQuery('#sprite');
 			this.si = new app.view.SpriteImage( img, onSpriteComplete.bind(this) );
@@ -52,7 +59,7 @@
 			var n = this.si.getLength();
 			var prev, div, show, hide, tweens;
 			this.timeline = new TimelineMax({repeat:-1});
-			var speed = this.si.getSpeed();
+			var speed = 1/this.si.getFramerate();
 
 			while( n-- )
 			{
@@ -74,11 +81,9 @@
 				this.timeline.add(tweens);
 			}
 
-			// layout
-			this.container.css({
-				width: this.si.getWidth(),
-				height: this.si.getHeight()
-			})
+			this.frames = jQuery('.domframe');
+			this.containers = jQuery('.domcontainer');
+			this.updateLayout();
 		},
 
 		/**
@@ -104,10 +109,77 @@
 		 **/
 		fullscreen: function( value )
 		{
+			this._fullscreen = value;
+
 			if (value)
 				this.view.addClass('fullscreen');
 			else
 				this.view.removeClass('fullscreen');
+
+			this.updateLayout();
+		},
+
+		/** 
+		 *	Update the layout
+		 **/
+		updateLayout: function()
+		{
+			if ( !this.frames )
+				return;
+
+			var w = 0;
+			var h = 0;
+
+			if ( this._fullscreen )
+			{
+				w = this.win.width();
+				h = this.win.height();
+			}
+			else
+			{
+				w = this.si.getWidth();
+				h = this.si.getHeight();
+			}
+
+			var r = 1;
+			if ( w > h )
+			{
+				r = h/this.si.getHeight();
+			}
+			else
+			{
+				r = w/this.si.getWidth();
+			}
+			var rw = r*this.si.getWidth() |0;
+			var rh = r*this.si.getHeight() |0;
+
+			console.log( 'updateLayout', this._fullscreen, w, h );
+			console.log( this.frames );
+
+			TweenMax.set( this.containers, {
+				scaleX: r,
+				scaleY: r,
+			});
+
+			console.log( ( h - rh ) );
+
+			TweenMax.set( this.container, {
+				width: w,
+				height: h
+			});
+
+			// TweenMax.set( this.containers, {
+			// 	width: w,
+			// 	height: h
+			// })
+
+
+
+			// this.sprite.x = ( w - rw )>>1;
+			// this.sprite.y = ( h - rh )>>1;
+
+			// this.sprite.scaleX =
+			// this.sprite.scaleY = r;
 		}
 
 

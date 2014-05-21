@@ -87,6 +87,16 @@
 			return this._speed;
 		},
 
+		/**
+		 *	Return the framerate
+		 *
+		 *	@return int
+		 **/
+		getFramerate: function()
+		{
+			return this._framerate;
+		},
+
 		//===========/----------------------------------------------
 		//  [_MTD]  /  Methods public
 		//=========/------------------------------------------------

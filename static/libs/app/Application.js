@@ -89,7 +89,7 @@
 			this.dom = new app.view.DomGif( jQuery('#dom') );
 
 			// start
-			this.setRendering( app.Data.CANVAS )
+			this.setRendering( app.Data.DOM )
 			this.meter.tickStart();
 			this.render();
 		},
