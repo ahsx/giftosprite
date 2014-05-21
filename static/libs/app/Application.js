@@ -20,7 +20,7 @@
 		/**	
 		 *	Fullscreen display
 		 **/
-		_fullscreen: true,
+		_fullscreen: false,
 
 		//===========/----------------------------------------------
 		//  [_GET]  /  Getters Setters
@@ -89,7 +89,7 @@
 			this.dom = new app.view.DomGif( jQuery('#dom') );
 
 			// start
-			this.setRendering( app.Data.DOM )
+			this.setRendering( app.Data.GIF )
 			this.meter.tickStart();
 			this.render();
 		},
