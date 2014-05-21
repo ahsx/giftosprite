@@ -45,7 +45,6 @@
 		 **/
 		show: function() 
 		{
-			console.log('AnimatedGif - Show');
 			this.view.removeClass('hidden');
 		},
 
@@ -54,8 +53,20 @@
 		 **/
 		hide: function() 
 		{
-			console.log('AnimatedGif - Hide');
 			this.view.addClass('hidden');
+		},
+
+		/**
+		 *	Display fullscreen or not
+		 *
+		 *	@param value Boolean
+		 **/
+		fullscreen: function( value )
+		{
+			if (value)
+				this.view.addClass('fullscreen');
+			else
+				this.view.removeClass('fullscreen');
 		}
 	});
 

@@ -20,7 +20,7 @@
 		/**	
 		 *	Fullscreen display
 		 **/
-		_fullscreen: false,
+		_fullscreen: true,
 
 		//===========/----------------------------------------------
 		//  [_GET]  /  Getters Setters
@@ -89,7 +89,7 @@
 			this.dom = new app.view.DomGif( jQuery('#dom') );
 
 			// start
-			this.setRendering( app.Data.CANVAS )
+			this.setRendering( app.Data.GIF )
 			this.meter.tickStart();
 			this.render();
 		},
@@ -99,7 +99,7 @@
 		 **/
 		update: function()
 		{
-			console.log('update', this._currentRendering);
+			console.log('update', this._currentRendering, this._fullscreen);
 			switch( this._currentRendering )
 			{
 				case app.Data.GIF:
@@ -121,6 +121,10 @@
 					this.dom.show();
 					break;
 			}
+
+			this.animated.fullscreen( this._fullscreen );
+			this.canvas.fullscreen( this._fullscreen );
+			this.dom.fullscreen( this._fullscreen );
 		},
 
 		/**
@@ -146,6 +150,7 @@
 	function onChangeHandler( event )
 	{
 		this.setRendering( this.rendering.val() );
+		this.setFullscreen( this.fullscreen.is(':checked') );
 	}
 
 })(window);

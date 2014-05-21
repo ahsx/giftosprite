@@ -63,7 +63,6 @@
 		 **/
 		show: function() 
 		{
-			console.log('CanvasGif - Show');
 			this.view.removeClass('hidden');
 			createjs.Ticker.addEventListener('tick', this.stage );
 		},
@@ -73,7 +72,6 @@
 		 **/
 		hide: function() 
 		{
-			console.log('CanvasGif - Hide');
 			this.view.addClass('hidden');
 
 			createjs.Ticker.removeEventListener( 'tick', this.stage );
@@ -88,8 +86,21 @@
 				width: this.si.getWidth(),
 				height: this.si.getHeight()
 			});
+		},
 
+		/**
+		 *	Display fullscreen or not
+		 *
+		 *	@param value Boolean
+		 **/
+		fullscreen: function( value )
+		{
+			if (value)
+				this.view.addClass('fullscreen');
+			else
+				this.view.removeClass('fullscreen');
 		}
+
 	});
 
 	//===========/----------------------------------------------
