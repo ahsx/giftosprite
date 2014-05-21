@@ -73,6 +73,12 @@
 				// timeline
 				this.timeline.add(tweens);
 			}
+
+			// layout
+			this.container.css({
+				width: this.si.getWidth(),
+				height: this.si.getHeight()
+			})
 		},
 
 		/**

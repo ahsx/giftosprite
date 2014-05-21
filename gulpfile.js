@@ -8,12 +8,8 @@ var gulp = require('gulp')
 	, uglify = require('gulp-uglifyjs')
 	, concatsm = require('gulp-concat-sourcemap')
 	, concat = require('gulp-concat')
-	, nodemon = require('gulp-nodemon')
-	, svgSprites = require('gulp-svg-sprites')
-	, svg = svgSprites.svg
 	, livereload = require('gulp-livereload')
 	;	
-
 
 /////////////////////>	Configuration
 
@@ -32,20 +28,20 @@ var gulp = require('gulp')
 var styles = [
 	{
 		name:		"app",
-		output:		"public/static/styles/",
-		src: 		"public/static/styles/less/app.less",
+		output:		"static/styles/",
+		src: 		"static/styles/less/app.less",
 		watch:	[
-					"public/static/styles/less/app/**/*.less",
-					"public/static/styles/less/app.less"
+					"static/styles/less/app/**/*.less",
+					"static/styles/less/app.less"
 		]
 	}
 	,{
 		name:		"vendors",
-		output:		"public/static/styles/",
-		src:		"public/static/styles/less/vendor.less",
+		output:		"static/styles/",
+		src:		"static/styles/less/vendor.less",
 		watch:	[
-					"public/static/styles/less/vendor/**/*.less",
-					"public/static/styles/less/vendor.less"
+					"static/styles/less/vendor/**/*.less",
+					"static/styles/less/vendor.less"
 		]
 	}
 ];
@@ -68,37 +64,37 @@ var styles = [
 var libs = [
 	{
 		name:				"app",
-		output:				"public/static/libs/",
+		output:				"static/libs/",
 		template:			"application/views/includes/libs/app.php",
 		sourceMap:			true,
 		lint:				false,
 		build:				'concat',
-		watch:				'public/static/libs/app/**/*.js',
+		watch:				'static/libs/app/**/*.js',
 		src:				
 		[
-							 'public/static/libs/app/Namespace.js'
-							,'public/static/libs/app/**/*.js'
-							,'public/static/libs/app/Start.js'
+							 'static/libs/app/Namespace.js'
+							,'static/libs/app/**/*.js'
+							,'static/libs/app/Start.js'
 		]
 	}
 	,{
 		name:				"vendors",
-		output:				"public/static/libs/",
+		output:				"static/libs/",
 		template:			"application/views/includes/libs/vendors.php",
 		sourceMap:			false,
 		lint:				false,
 		build:				'concat',
 		src:				
 		[
-							 'public/static/libs/vendors/jquery-2.1.0.min.js'
+							 'static/libs/vendors/jquery-2.1.0.min.js'
 
-							,'public/static/libs/vendors/preloadjs-0.4.1.min.js'
-							,'public/static/libs/vendors/easeljs-0.7.1.min.js'
+							,'static/libs/vendors/preloadjs-0.4.1.min.js'
+							,'static/libs/vendors/easeljs-0.7.1.min.js'
 							
-							,'public/static/libs/vendors/TweenMax.min.js'
-							,'public/static/libs/vendors/TimelineMax.min.js'
+							,'static/libs/vendors/TweenMax.min.js'
+							,'static/libs/vendors/TimelineMax.min.js'
 
-							,'public/static/libs/vendors/**/*.js'
+							,'static/libs/vendors/**/*.js'
 		]
 	}
 ]
@@ -145,27 +141,6 @@ gulp.task('libs.concat', function()
      	.pipe( concat(lib.name+'.min.js') )
      	.pipe( gulp.dest(lib.output) );
 	}
-});
-
-/**
- *	Convert the svg files to a svg sprites
- **/
-gulp.task('sprites', function()
-{
-	var config = 
-	{
-		  defs:true
-		, cssFile: "../styles/less/app/svg-sprite.less"
-		, svg: 
-		{
-			defs: "svg-defs.svg"
-		}
-	}
-
-	gulp.src('public/static/images/svg-sprite/*.svg')
-		.pipe( svg(config) )
-		.pipe( gulp.dest('public/static/images/') )
-	;
 });
 
 ///////////> Dev
@@ -304,13 +279,6 @@ gulp.task('dev', ['styles.dev', 'libs.dev'], function ()
 			});
 		}
 	}
-
-	// watch nodejs files
-	nodemon({
-		script: 'app.js',
-		ignore: ['public/*', 'node_modules/*'],
-		env: { 'NODE_ENV':'development' }
-	});
 });
 
 ///////////> Distribution
@@ -386,7 +354,7 @@ gulp.task('prod', ['dist']);
 gulp.task('default', function()
 {
 	console.log( 'Gulp build script for frontend development' );
-	console.log( 'Version: 1.3' );
+	console.log( 'Version: 1.4' );
 	console.log( '' );
 	console.log( 'Available tasks:' );
 	console.log( '' );

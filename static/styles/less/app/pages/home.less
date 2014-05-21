@@ -1,22 +1,109 @@
+div#all
+{
+	header
+	{
+		position: relative;
+		z-index: 99;
+		background: #fefefe;
+		.drop-shadow(0px, 0px, 10px, .3);
+
+		.font_normal();
+
+		form
+		{
+			background: hsl(0, 0, 90%);
+			display: block;
+			float: right;
+			padding-bottom: 2px;
+
+			fieldset
+			{
+				display: block;
+				float: left;
+
+				border: none;
+
+				legend
+				{
+					display: block;
+					float: left;
+					font-size: 13px;
+
+					margin: 10px 0px 0px 10px;
+				}
+
+				input, select
+				{
+					display: block;
+					float: left;
+				}
+
+				input[type=checkbox]
+				{
+					margin: 12px 0px 0px 0px;
+				}
+
+				select
+				{
+					margin: 8px 0px 0px 12px;
+
+				}
+			}
+		}
+
+		div#fps
+		{
+			background: hsl(0, 0, 10%);
+			display: block;
+			float: right;
+			padding: 0px 10px 7px 0px;
+		}
+
+		h1
+		{
+			font-size: 16px;
+			padding-left: 10px;
+			.font_normal();
+		}
+
+	}	
+}
+
 article#home
 {
 	section
 	{
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+
 		figure
 		{
 			display: inline-block;
-			padding: 10px;
-			.rounded(2px);
-			.drop-shadow(0px, 0px, 10px, .3);
+			text-align: center;
+			width: 100%;
+			height: 100%;
 
 			figcaption
 			{
-				padding: 10px 0px 5px 0px;
+				display: inline-block;
+				position: relative;
+				padding: 20px 30px;
+				margin-top: 10px;
+				background: #fefefe;
+
+				color: #333;
+				.font_normal();
+
+				.drop-shadow(0px, 0px, 10px, .3);
 			}
 
-			canvas
+			.frame
 			{
-
+				border: 10px solid #fefefe;
 			}
 
 			div.container
@@ -38,6 +125,31 @@ article#home
 					// position: absolute;
 				}
 			}
+		}
+
+		&#gif
+		{
+			background: desaturate(#ff1122, 30%);
+
+			img
+			{
+				display: block;
+			}
+		}
+
+		&#spritesheet
+		{
+			background: desaturate(#00ff22, 30%);
+
+			canvas
+			{
+				display: block;
+			}
+		}
+
+		&#dom
+		{
+			background: desaturate(#2200ff, 30%);
 		}
 	}
 }

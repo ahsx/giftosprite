@@ -15,7 +15,12 @@
 		/**
 		 *	Current default value
 		 **/
-		_current : null,
+		_currentRendering : null,
+
+		/**	
+		 *	Fullscreen display
+		 **/
+		_fullscreen: false,
 
 		//===========/----------------------------------------------
 		//  [_GET]  /  Getters Setters
@@ -26,10 +31,26 @@
 		 *
 		 *	@param value String
 		 **/
-		setCurrent: function( value )
+		setRendering: function( value )
 		{
-			this._current = value;
+			if ( value == this._currentRendering )
+				return; 
 
+			this._currentRendering = value;
+			this.update();
+		},
+
+		/**
+		 *	Set the fullscreen mode
+		 *
+		 *	@param value Boolean
+		 **/
+		setFullscreen: function( value )
+		{
+			if ( value == this._fullscreen )
+				return;
+
+			this._fullscreen = value;
 			this.update();
 		},
 
@@ -50,10 +71,17 @@
 		 **/
 		init: function() 
 		{
-			this.data = app.Data;
-			this.gui = new dat.GUI();
+			// fps
+			this.meter = new FPSMeter( document.getElementById('fps'), {
+				theme: 'dark',
+				graph: true,
 
-			this.gui.add( this.data, 'rendering', ['gif', 'canvas', 'dom']).onChange( changeHandler.bind(this) );
+				position: 'relative'
+			});
+
+			// forms
+			this.fullscreen = jQuery('#fullscreen').on('change', onChangeHandler.bind(this) );
+			this.rendering = jQuery('#rendering').on('change', onChangeHandler.bind(this) );
 
 			// managers
 			this.animated = new app.view.AnimatedGif( jQuery('#gif') );
@@ -61,13 +89,9 @@
 			this.dom = new app.view.DomGif( jQuery('#dom') );
 
 			// start
-			this.setCurrent( app.Data.DOM )
-
-			// var rendering = this.gui.addFolder('Rendering');
-			// rendering.add(this.data, 'gif').onChange( changeHandler.bind(this) );
-			// rendering.add(this.data, 'canvas').onChange( changeHandler.bind(this) );
-			// rendering.add(this.data, 'dom').onChange( changeHandler.bind(this) );
-			// rendering.open();
+			this.setRendering( app.Data.CANVAS )
+			this.meter.tickStart();
+			this.render();
 		},
 
 		/**
@@ -75,8 +99,8 @@
 		 **/
 		update: function()
 		{
-			console.log('update', this._current);
-			switch( this._current )
+			console.log('update', this._currentRendering);
+			switch( this._currentRendering )
 			{
 				case app.Data.GIF:
 				default:
@@ -97,6 +121,16 @@
 					this.dom.show();
 					break;
 			}
+		},
+
+		/**
+		 *	Animation frame render
+		 **/
+		render: function()
+		{
+			requestAnimationFrame(this.render.bind(this));
+
+			this.meter.tick();
 		}
 	});
 
@@ -104,9 +138,14 @@
 	//  [_PRI]  /  Methods private
 	//=========/------------------------------------------------
 
-	function changeHandler(value)
+	/**
+	 *	Change handler
+	 *
+	 *	@param event Event
+	 **/
+	function onChangeHandler( event )
 	{
-		this.setCurrent( value );
+		this.setRendering( this.rendering.val() );
 	}
 
 })(window);

@@ -9,25 +9,60 @@
   </head>
   <body>
     <div id="all">
+      <header class="clearfix">
+        <div class="clearfix" id="fps"></div>
+        <form class="clearfix">
+
+          <fieldset class="clearfix">
+            <input type="checkbox" name="fullscreen" id="fullscreen" />
+            <legend>fullscreen</legend>
+          </fieldset>
+
+          <fieldset class="clearfix">
+            <legend>rendering mode</legend>
+            <select name="rendering" id="rendering">
+              <option value="gif">GIF</option>
+              <option value="canvas">Canvas & Easeljs</option>
+              <option value="dom">Dom & TweenLite</option>
+            </select>
+          </fieldset>
+        </form>        
+
+        <h1>Animated Gif vs Canvas Spritesheet vs Dom</h1>
+      </header>
       <article id="home">
-        <section id="info"></section>
+
         <section id="gif">
-          <figure><img src="./static/images/665ac36d.gif">
-            <figcaption>Animated Gif</figcaption>
+          <figure class="vcenter">
+            <span class="item empty"></span>
+            <span class="item">
+              <img class="frame" src="./static/images/665ac36d.gif">
+              <figcaption>Animated Gif</figcaption>
+            </span>
           </figure>
         </section>
+
         <section id="spritesheet">
-          <figure><img id="sprite" src="./static/images/665ac36d.jpg" class="hidden">
-            <canvas></canvas>
-            <figcaption>Canvas</figcaption>
+          <figure class="vcenter">
+            <span class="item empty"></span>
+            <span class="item">
+              <img id="sprite" src="./static/images/665ac36d.jpg" class="hidden">
+              <canvas class="frame"></canvas>
+              <figcaption>Canvas</figcaption>
+            </span>
           </figure>
         </section>
+
         <section id="dom">
-          <figure>
-            <div class="container"></div>
-            <figcaption>Dom & TweenMax</figcaption>
+          <figure class="vcenter">
+            <span class="item empty"></span>
+            <span class="item">
+              <div class="container frame"></div>
+              <figcaption>Dom & TweenMax</figcaption>
+            </span>
           </figure>
         </section>
+
       </article>
     </div>
     <script type="text/javascript" src="./static/libs/vendors.min.js"></script>
