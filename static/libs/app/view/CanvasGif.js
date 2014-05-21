@@ -12,6 +12,11 @@
 		//  [_PRO]  /  Properties
 		//=========/------------------------------------------------
 
+		/**
+		 *	Fullscreen display
+		 **/
+		_fullscreen: false,
+
 		//===========/----------------------------------------------
 		//  [_GET]  /  Getters Setters
 		//=========/------------------------------------------------
@@ -38,6 +43,7 @@
 		{
 			this.hide();
 
+			this.win = jQuery(window);
 			var img = jQuery('#sprite');
 			this.si = new app.view.SpriteImage( img, onSpriteComplete.bind(this) );
 			this.canvas = jQuery('canvas');
@@ -82,10 +88,46 @@
 		 **/
 		updateLayout: function()
 		{
+			var w = 0;
+			var h = 0;
+
+			if ( this._fullscreen )
+			{
+				w = this.win.width();
+				h = this.win.height();
+			}
+			else
+			{
+				w = this.si.getWidth();
+				h = this.si.getHeight();
+			}
+
 			this.canvas.attr({
-				width: this.si.getWidth(),
-				height: this.si.getHeight()
+				width: w,
+				height: h
 			});
+
+			if (this.sprite)
+			{
+				var r = 1;
+				if ( w > h )
+				{
+					r = h/this.si.getHeight();
+				}
+				else
+				{
+					r = w/this.si.getWidth();
+				}
+				var rw = r*this.si.getWidth() |0;
+				var rh = r*this.si.getHeight() |0;
+
+				this.sprite.x = ( w - rw )>>1;
+				this.sprite.y = ( h - rh )>>1;
+
+				this.sprite.scaleX =
+				this.sprite.scaleY = r;
+			}
+
 		},
 
 		/**
@@ -95,10 +137,14 @@
 		 **/
 		fullscreen: function( value )
 		{
+			this._fullscreen = value;
+
 			if (value)
 				this.view.addClass('fullscreen');
 			else
 				this.view.removeClass('fullscreen');
+
+			this.updateLayout();
 		}
 
 	});
