@@ -1,0 +1,27 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "devDependencies": {
+    "gulp": "~3.5.2",
+    "gulp-jshint": "~1.5.0",
+    "gulp-less": "~1.2.1",
+    "gulp-util": "~2.2.14",
+    "stream-combiner": "0.0.4",
+    "gulp-uglifyjs": "latest",
+    "gulp-concat": "^2.2.0",
+    "gulp-nodemon": "latest",
+    "gulp-concat-sourcemap": "latest",
+    "gulp-svg-sprites": "latest",
+    "gulp-livereload": "^1.3.1",
+    "gulp-watch": "^0.6.4"
+  },
+  "dependencies": {
+    "express": "~3.4.0",
+    "jade": "*",
+    "helmet": "0.0.7"
+  }
+}
