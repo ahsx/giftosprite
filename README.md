@@ -1,8 +1,9 @@
 giftosprite
 ===========
 
-Transform animated gif to sprite for enhanced performance
+Transform an animated gif to a jpeg sprite. Some metadata are stored at the end of the file to help the parser to reproduce the animation. Currently the framerate is deduced from the first frame.
 
+The script has been tested only on osx 10.9.2 but should work on previous version of the os. 
 
 ## Dependencies
 
@@ -21,7 +22,6 @@ You'll find the installation instruction on the [official website](http://www.lc
 
 ```bash
 giftosprite.sh [source] [destination]
-
 ```
 
 **Source:** The source file must exists and be a image/gif file.   
@@ -29,7 +29,15 @@ giftosprite.sh [source] [destination]
 
 ## Example
 
+Convert file.gif to a spritesheet named file.jpg
+
 ```bash
 giftosprite.sh file.gif file.jpg
-
 ```
+
+## TODO
+
+Possible enhancement for the script. 
+
+- Add an option for the output format
+- Handle multiple framerate
