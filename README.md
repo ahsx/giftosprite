@@ -5,6 +5,8 @@ Transform an animated gif to a jpeg sprite. Some metadata are stored at the end 
 
 The script has been tested only on osx 10.9.2 but should work on previous version of the os. 
 
+The demonstration page is available at: http://ahsx.github.io/giftosprite/
+
 ## Dependencies
 
 - `ImageMagick 6.8.x+`  
